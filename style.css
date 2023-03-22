@@ -21,31 +21,28 @@ body{
     place-content:center;
 }
 .screen{
-    width: 90vw;
     aspect-ratio: 9/16;
     background-color: coral;
-    display: grid;
 }
 .scroll {
     background-color: saddlebrown ;
-    width: 600px;
-    height: 90vh;
+    width: 45rem;
+    height: 70vh;
     overflow-x: hidden;
     overflow-y: auto;
     text-align: center;
-    padding: 20px;
 }
 .Left{
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
     height: max-content;
+    margin-block: 20px;
 }
 .Right{
     display: flex;
     justify-content: flex-end;
-    align-items: center;
     height: max-content;
+    margin-block: 20px;
 }
 .ServerMessage{
     width: 65%;
@@ -55,9 +52,41 @@ body{
 }
 .UserMessage{
     max-width: 65%;
-    display: flex;
+    display: none;
     justify-content: flex-start;
     background-color: green;
     height: max-content;
     padding: 10px;
+}
+.UserAccepting{
+    width: 45rem;
+    height: 4rem;
+    background-color: brown;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.SentButton{
+    width:  5;
+    aspect-ratio: 1;
+    background-color: aqua;
+    font-size: 4rem;
+}
+.usertext{
+    width: 85%;
+    height: 80%;
+    font-size: 2rem;
+}
+.submitbutton{
+    width: 10%;
+    height: 80%;
+}
+.sentbutton{
+    width: 3rem;
+}
+#clue2{
+    display: none;
+}
+#clue3{
+    display: none;
 }

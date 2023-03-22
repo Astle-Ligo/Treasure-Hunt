@@ -1,6 +1,6 @@
 // set up text to print, each item in array is new line
 var aText = new Array(
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. "
     );
     var iSpeed = 50; // time delay of print out
     var iIndex = 0; // start printing array at this posision
@@ -11,20 +11,14 @@ var aText = new Array(
     var sContents = ''; // initialise contents variable
     var iRow; // initialise current row
      
-    function submit(){
-        var answer = document.getElementById("useranswer");
 
-        if(answer === "ANSWER1")
-            destination = document.getElementById("typedtext2");
-        if(answer === "ANSWER2")
-        destination = document.getElementById("typedtext3");
+    var destination = document.getElementById("typedtext");
 
-    }
+
     function typewriter()
     {
      sContents =  ' ';
      iRow = Math.max(0, iIndex-iScrollAt);
-     var destination = document.getElementById("typedtext");
      
      while ( iRow < iIndex ) {
       sContents += aText[iRow++] + '<br />';
@@ -44,4 +38,31 @@ var aText = new Array(
     
     
     typewriter();
+
+    
+
+
+    function sent(){
+       var userinput = document.getElementById("usertext").value
+        var useranswer = document.getElementById("useranswer")
+        var UserMessage = document.getElementById("UserMessage")
+
+
+        document.getElementById("usertext").value = ""
+        UserMessage.style.display = "flex";
+        useranswer.innerHTML = userinput
+
+
+
+        switch (userinput) {
+            case "ANSWER":
+                document.getElementById("clue2").style.display = "block"
+                break;
+            case "ANSWER1":
+                document.getElementById("clue3").style.display = "block"
+                break;
+            default:
+                break;
+        }
+    }
 

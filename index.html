@@ -12,16 +12,35 @@
         <div class="fullscreen">
             <div class="screen scroll">
                 <div class="Left">
-                    <div class="ServerMessage">
+                    <div class="ServerMessage" id="ServerMessage">
                         <div id="typedtext"></div>
                     </div>
                 </div>
                 <div class="Right">
-                    <div class="UserMessage">
-                        <div id="useranswer">ANSWER</div>
+                    <div class="UserMessage" id="UserMessage">
+                        <div id="useranswer"></div>
                     </div>
                 </div>
-                
+                <div class="Left" id="clue2">
+                    <div class="ServerMessage" id="ServerMessage">
+                        <div id="">hai</div>
+                    </div>
+                    <div class="Right">
+                        <div class="UserMessage" id="UserMessage">
+                            <div id="useranswer"></div>
+                        </div>
+                    </div>
+                    <div class="Left" id="clue3">
+                        <div class="ServerMessage" id="ServerMessage">
+                            <div id="">hELLO</div>
+                        </div>
+                </div>
+            </div>
+            <div class="Sent">
+                <div class="UserAccepting">
+                    <input type="text" name="" id="usertext" class="usertext">
+                    <button type="submit" class="submitbutton" id="submitbutton" onclick="sent()"><img src="./send-sharp.svg" alt="" class="sentbutton"></button>
+                </div>
             </div>
         </div>
     </div>
