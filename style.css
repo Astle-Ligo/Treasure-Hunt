@@ -21,7 +21,7 @@ body{
     place-content:center;
 }
 .screen{
-    aspect-ratio: 9/16;
+    aspect-ratio: 16/9;
     background-color: coral;
 }
 .scroll {

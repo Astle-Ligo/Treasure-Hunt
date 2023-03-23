@@ -70,6 +70,28 @@
 
     
 
+    //SETTING ENTER CLICK TO CALLING SENT()
+
+    document.getElementById("usertext").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+         sent();
+        }
+      });
+
+
+
+    //PIN SCROLL LOCK DOWN
+    function updateScroll(){
+        var element = document.getElementById("screen");
+        element.scrollTop = element.scrollHeight;
+    }
+    setInterval(updateScroll,1);
+
+
+    
+
+    // ALL THE THINGS TO BE DONE WHEN THE SENT BUTTON IS CLICKED
 
     function sent(){
         var userinput = document.getElementById("usertext").value   //FOR TAKING THE VALUE OF INPUT FROM THE USER
@@ -172,7 +194,8 @@
                 screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
                 Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
                 ServerMessage.appendChild(finalAnswer)                    //MAKING clue2 A SUB CHILD OF ServerMessage
-                
+            break;
+
             default:
 
                 var wrongAnswer = document.createElement("div")           //CREAING A NEW DIV clue2 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
