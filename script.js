@@ -1,4 +1,8 @@
     // set up text to print, each item in array is new line
+    var initial = new Array(
+        "ENTER THE CODE 'START' TO START THE GAME"
+    );
+
     var CLUE1 = new Array(
         "THIS IS YOUR CLUE NO 1 DO THE FOLLOWING STEPS AND FIND THE REAMAINING CLUE AND BE THE ULTIMATE WINNER"
     );   
@@ -29,7 +33,7 @@
 
         var iSpeed = 50; // time delay of print out
         var iIndex = 0; // start printing array at this posision
-        var iArrLength = CLUE1[0].length; // the length of the text array
+        var iArrLength = initial[0].length; // the length of the text array
         var iScrollAt = 20; // start scrolling up at this many lines
             
         var iTextPos = 0; // initialise text position
@@ -42,22 +46,22 @@
     function typewriter()
     {
 
-        var destination = document.getElementById("clue1");        
+        var destination = document.getElementById("initial");        
 
         sContents =  ' ';
         iRow = Math.max(0, iIndex-iScrollAt);
         
         while ( iRow < iIndex ) {
-            sContents += CLUE1[iRow++] + '<br />';
+            sContents += initial[iRow++] + '<br />';
         }
 
-        destination.innerHTML = sContents + CLUE1[iIndex].substring(0, iTextPos) + "_";
+        destination.innerHTML = sContents + initial[iIndex].substring(0, iTextPos) + "_";
         
         if ( iTextPos++ == iArrLength ) {
             iTextPos = 0;
             iIndex++;
-            if ( iIndex != CLUE1.length ) {
-                iArrLength = CLUE1[iIndex].length;
+            if ( iIndex != initial.length ) {
+                iArrLength = initial[iIndex].length;
                 setTimeout("typewriter()", 500);
             }
         } else {
@@ -129,6 +133,18 @@
 
 
         switch (userinput) {
+            case "START":
+            
+                var clue1 = document.createElement("div")           //CREAING A NEW DIV clue2 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
+                clue1.id = "clue1"                                  //SETTING AN ID FOR clue2
+
+                clue1.innerHTML = "THIS IS YOUR CLUE NO 1 DO THE FOLLOWING STEPS AND FIND THE REAMAINING CLUE AND BE THE ULTIMATE WINNER"     //ENTERING THE CLUE2 TEXT
+                
+                screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
+                Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
+                ServerMessage.appendChild(clue1)                    //MAKING clue2 A SUB CHILD OF ServerMessage
+
+            break;
             case "ANSWER1":
                 
                 var clue2 = document.createElement("div")           //CREAING A NEW DIV clue2 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
