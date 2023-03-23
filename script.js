@@ -86,10 +86,10 @@
         var element = document.getElementById("screen");
         element.scrollTop = element.scrollHeight;
     }
-    setInterval(updateScroll,1);
-
-
     
+
+
+
 
     // ALL THE THINGS TO BE DONE WHEN THE SENT BUTTON IS CLICKED
 
@@ -140,8 +140,7 @@
                 Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
                 ServerMessage.appendChild(clue2)                    //MAKING clue2 A SUB CHILD OF ServerMessage
 
-                destination = document.getElementById("CLUE1");
-                typewriter();
+                
                 
             break;
 
@@ -209,5 +208,7 @@
             
             break;
         }
+
+        updateScroll();
     }
 
