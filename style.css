@@ -41,8 +41,9 @@ body{
     background-color: blue;
     height:max-content;
     padding: 15px;
-    border-radius: 25px;
+    border-radius: 20px 20px 20px 0;
     color: white;
+    display: flex;
 }
 .Right{
     display: flex;
@@ -54,8 +55,16 @@ body{
     background-color: green;
     height: max-content;
     padding: 15px;
-    border-radius: 25px;
+    border-radius: 20px 20px 0 20px;
     color: white;
+    font-size: 1.75rem;
+    display: flex;
+}
+.Time{
+    font-size: 10px;
+    margin-inline: 10px;
+    align-self: flex-end;
+    width: 50px;
 }
 .UserAccepting{
     width: 100%;
@@ -77,3 +86,8 @@ body{
 .sentbutton{
     width: 3rem;
 }
+@media only screen and (max-width: 600px) {
+    .screen{
+        aspect-ratio: 9/16;
+    }
+  }

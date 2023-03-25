@@ -3,6 +3,16 @@
         var txt                                             //VARIABLE TO STORE THE TEXT THAT SHOULD BE ANIMATED
 
 
+        //VARIABLES USED FOR COUNTING THE NUMBER OF TIMES THE CODE IS ENTERED
+
+        var startcount = 0
+        var clue1count = 0
+        var clue2count = 0
+        var clue3count = 0
+        var clue4count = 0
+        var finalAnswercount = 0
+        
+
         demo = document.getElementById("initial")           //ASSIGNING THE INITIAL DIV TO DEMO 
         txt = "ENTER THE CODE 'START' TO START THE GAME"    //ASSIGNING THE INITIAL TEXT TO txt
 
@@ -14,15 +24,24 @@
         function typing(txt){
                 
         var i = 0;
-        var speed = 75;
+        var speed = 50;
 
         function typeWriter() {
             if (i < txt.length) {
                 demo.innerHTML += txt.charAt(i);
                 i++;
             setTimeout(typeWriter, speed);
+
+            document.getElementById("usertext").style.pointerEvents="none"      //SET THE POINTER NOT TO USE WILL TYPING ANIMATION IS DONE
+            
+            }
+            else{
+
+                document.getElementById("usertext").style.pointerEvents="auto"  //SET THE POINTER BACK TO NORMAL
+
             }
             updateScroll();
+
         }
 
         typeWriter();
@@ -33,9 +52,9 @@
         //SETTING ENTER CLICK TO CALLING SENT()
 
         document.getElementById("usertext").addEventListener("keypress", function(event) {
-            if ((event.key === "Enter")&&(document.getElementById("usertext").value != "")) {
+            if (event.key === "Enter") {
                 event.preventDefault();
-                sent();
+                sentcheck();
             }
         });
 
@@ -48,8 +67,14 @@
             element.scrollTop = element.scrollHeight;
         }
     
+        //TO CALL A FUNCTION ONLY IF THERE IS CONTENT
 
+        function sentcheck(){
 
+            if(document.getElementById("usertext").value != "")
+
+                sent();
+        }
 
 
         // ALL THE THINGS TO BE DONE WHEN THE SENT BUTTON IS CLICKED
@@ -96,11 +121,10 @@
             cursor.className = "cursor"
 
 
-            switch (userinput) {
 
-                case "START":
-                
-                    var clue1 = document.createElement("div")           //CREAING A NEW DIV clue1 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
+            if((userinput === "START")&&(startcount<1)){
+
+                var clue1 = document.createElement("div")               //CREAING A NEW DIV clue1 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
                     clue1.id = "clue1"                                  //SETTING AN ID FOR clue1
                 
                     
@@ -116,10 +140,13 @@
             
                     typing(txt);                                        //CALLING typing function
 
-                break;
+                    clue1.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+                    startcount++
 
-                case "ANSWER1":
-                    
+            }
+
+            else if((userinput === "ANSWER1")&&(clue1count<1)){
+
                     var clue2 = document.createElement("div")           //CREAING A NEW DIV clue2 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
                     clue2.id = "clue2"                                  //SETTING AN ID FOR clue2
 
@@ -136,9 +163,15 @@
             
                     typing(txt);                                        //CALLING typing function
                     
-                break;
+                    
+                    clue2.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
 
-                case "ANSWER2":
+                    clue1count++
+
+
+            }
+               
+            else if((userinput === "ANSWER2")&&(clue2count<1)){
 
                     var clue3 = document.createElement("div")           //CREAING A NEW DIV clue3 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
                     clue3.id = "clue3"                                  //SETTING AN ID FOR clue3
@@ -156,9 +189,15 @@
             
                     typing(txt);                                        //CALLING typing function                             
                     
-                break;
 
-                case "ANSWER3":
+                    clue3.id =""
+
+                    clue2count++
+
+                    
+            }
+
+            else if((userinput === "ANSWER3")&&(clue3count<1)){
 
                     var clue4 = document.createElement("div")           //CREAING A NEW DIV clue4 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
                     clue4.id = "clue4"                                  //SETTING AN ID FOR clue4
@@ -176,9 +215,15 @@
             
                     typing(txt);                                        //CALLING typing function
 
-                break;
 
-                case "ANSWER4":
+                    clue4.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+
+                    clue3count++
+
+                    
+            }    
+
+            else if((userinput === "ANSWER4")&&(clue4count<1)){
 
                     var clue5 = document.createElement("div")           //CREAING A NEW DIV clue5 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
                     clue5.id = "clue5"                                  //SETTING AN ID FOR clue2
@@ -196,9 +241,15 @@
             
                     typing(txt);                                        //CALLING typing function
                     
-                break;
 
-                case "ANSWER5":
+                    clue5.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+
+                    clue4count++
+
+                    
+            } 
+
+            else if((userinput === "ANSWER5")&&(finalAnswercount<1)){
 
                     var finalAnswer = document.createElement("div")     //CREAING A NEW DIV finalAnswer (DIV FOR SHOWING THE USER THE HUNT IS OVER)
                     finalAnswer.id = "finalAnswer"                      //SETTING AN ID FOR finalAnswer
@@ -216,9 +267,37 @@
             
                     typing(txt);                                        //CALLING typing function
 
-                break;
+                    finalAnswer.id = ""                                 //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+                    
 
-                default:
+                    finalAnswercount++
+
+            }
+
+            else if((startcount>0)||(clue1count>0)||(clue2count>0)||(clue3count>0)||(clue4count>0)||(finalAnswercount>0)){
+
+                var countMessage = document.createElement("div")        //CREAING A NEW DIV finalAnswer (DIV FOR SHOWING THE USER THE HUNT IS OVER)
+                countMessage.id = "countMessage"                        //SETTING AN ID FOR finalAnswer
+
+                
+                screen.appendChild(Left)                                //MAKING Left A SUB CHILD OF screen
+                Left.appendChild(ServerMessage)                         //MAKING ServerMessage A SUB CHILD OF Left
+                ServerMessage.appendChild(countMessage)                 //MAKING finalAnswer A SUB CHILD OF ServerMessage
+
+
+                //ASSIGNING SPECIFIC VALUE TO demo AND txt
+
+                demo = document.getElementById("countMessage")
+                txt = "YOU HAVE ALREADY ENTERED THE CODE '" + userinput + "'"
+        
+                typing(txt);                                            //CALLING typing function
+
+                countMessage.id = ""                                    //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+                
+
+            }
+
+            else{
 
                     var wrongAnswer = document.createElement("div")     //CREAING A NEW DIV wrongAnswer (DIV FOR SHOWING THE USER HAD ENTERED THE WRONG ANSWER)
                     wrongAnswer.id = "wrongAnswer"                      //SETTING AN ID FOR wrongAnswer
@@ -235,9 +314,12 @@
                     txt = "SORRY WRONG INPUT" 
             
                     typing(txt);                                        //CALLING typing function
-                
-                break;
+
+                    wrongAnswer.id = ""                                 //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATATION OF CODE IN THE SAME DIV
+
             }
+
+                
 
             updateScroll();                                             //CALLING updateScroll FUNCTION TO ALWAYS PIN THE SCREEN DOWN
         }
