@@ -2,6 +2,11 @@
         var demo                                            //VARIABLE TO STORE THE DIV ID IN WHICH THE TYPING ANIMATION TO BE DONE
         var txt                                             //VARIABLE TO STORE THE TEXT THAT SHOULD BE ANIMATED
 
+        var data = []                                       //VARIABLE TO STORE THE DATA OF INPUT TO SAVE AS PDF
+
+        var score = 0;                                      //VARIABLE TO STORE THE SCORE
+
+
 
         //VARIABLES USED FOR COUNTING THE NUMBER OF TIMES THE CODE IS ENTERED
 
@@ -52,7 +57,7 @@
         }
             
 
-        //SETTING TIMING
+        //SETTING TIMINGS
 
         function gettingTime(){
 
@@ -68,6 +73,19 @@
 
         }
 
+        function secondTime(){
+
+            var dt = new Date();
+            let hours = dt.getHours();
+            let minutes = dt.getMinutes();
+            let seconds = dt.getSeconds();
+            let ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes.toString().padStart(2, '0');
+            let time = hours + ':' + minutes  + ':' + seconds + " " + ampm;
+            return time
+        }
 
 
         //SETTING ENTER CLICK TO CALLING SENT()
@@ -121,6 +139,8 @@
             var useranswer = document.createElement("div")              //CREAING A NEW DIV useranswer (DIV FOR ENTERING THE VALUE THAT THE USER HAD INPUT)
             useranswer.innerHTML = userinput                            //ASSIGNING THE VALUE ENTERED BY THE USER TO THE useranswer
 
+
+
             userinput = userinput.toUpperCase();                        //CHANGING THE CASE OF THE INPUT TEXT TO UPPER CASE
 
             timeText = document.createElement("div")
@@ -144,8 +164,6 @@
             ServerMessage.className = "ServerMessage"                   //SETTING DIV NAME AS UserMessage FOR REUSABILITY
 
 
-            var cursor = document.createElement("div")
-            cursor.className = "cursor"
 
 
 
@@ -199,6 +217,7 @@
 
                     clue1count++
 
+                    score+=10
 
             }
                
@@ -225,6 +244,7 @@
 
                     clue2count++
 
+                    score+=10
                     
             }
 
@@ -251,6 +271,7 @@
 
                     clue3count++
 
+                    score+=10
                     
             }    
 
@@ -277,6 +298,7 @@
 
                     clue4count++
 
+                    score+=10
                     
             } 
 
@@ -294,7 +316,7 @@
                     //ASSIGNING SPECIFIC VALUE TO demo AND txt
 
                     demo = document.getElementById("finalAnswer")
-                    txt = "YOU HAVE COMPLETED THE TREASURE HUNT"
+                    txt = "YOU HAVE COMPLETED THE TREASURE HUNT \n PLEASE ENTER CODE 'END' TO SAVE YOUR GAME"
             
                     typing(txt);                                        //CALLING typing function
 
@@ -303,9 +325,39 @@
 
                     finalAnswercount++
 
+                    score+=10
+
+                    
+
             }
 
-            else if((clue1count>0)||(clue2count>0)||(clue3count>0)||(clue4count>0)||(finalAnswercount>0)){
+            else if(userinput === "END"){
+
+                var end = document.createElement("div")     //CREAING A NEW DIV finalAnswer (DIV FOR SHOWING THE USER THE HUNT IS OVER)
+                end.id = "end"                      //SETTING AN ID FOR finalAnswer
+
+                
+                screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
+                Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
+                ServerMessage.appendChild(end)              //MAKING finalAnswer A SUB CHILD OF ServerMessage
+
+
+                //ASSIGNING SPECIFIC VALUE TO demo AND txt
+
+                demo = document.getElementById("end")
+                txt = "THANKS FOR PLAYING WITH US"
+        
+                typing(txt);                                        //CALLING typing function
+
+                end.id = ""                                 //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+                
+               
+
+                func_savedata(data);
+
+        }
+
+            else if(((userinput === "START")&&(startcount>0))||(userinput === "ANSWER2")&&(clue2count>0)||(userinput === "ANSWER1")&&(clue1count>0)||(userinput === "ANSWER3")&&(clue3count>0)||(userinput === "ANSWER4")&&(clue4count>0)||(userinput === "ANSWER5")&&(finalAnswercount>0)){
 
                 var countMessage = document.createElement("div")        //CREAING A NEW DIV finalAnswer (DIV FOR SHOWING THE USER THE HUNT IS OVER)
                 countMessage.id = "countMessage"                        //SETTING AN ID FOR finalAnswer
@@ -325,7 +377,7 @@
 
                 countMessage.id = ""                                    //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
                 
-
+                score -= 5
             }
 
             else{
@@ -348,6 +400,8 @@
 
                     wrongAnswer.id = ""                                 //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATATION OF CODE IN THE SAME DIV
 
+                    score -= 5
+
             }
 
                     timeText = document.createElement("div")
@@ -361,5 +415,26 @@
 
             updateScroll();                                             //CALLING updateScroll FUNCTION TO ALWAYS PIN THE SCREEN DOWN
         
+    
+
+            data.push(secondTime() + "     -    " + userinput+"     -   "+score)
+
             Time.id = ""
         }
+
+
+
+        //SAVE AND DOWNLOAD THE FILE
+
+        function func_savedata(data){
+            
+            
+
+            var doc = new jsPDF()
+
+            doc.text(data,20,10)
+            doc.save('save.pdf')
+
+
+          
+          }
