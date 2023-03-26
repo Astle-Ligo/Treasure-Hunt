@@ -60,11 +60,11 @@ body{
     font-size: 1.75rem;
     display: flex;
 }
-.Time{
-    font-size: 10px;
+.timeText{
+    font-size: 12px;
     margin-inline: 10px;
     align-self: flex-end;
-    width: 50px;
+    min-width: 50px;
 }
 .UserAccepting{
     width: 100%;
@@ -89,5 +89,8 @@ body{
 @media only screen and (max-width: 600px) {
     .screen{
         aspect-ratio: 9/16;
+    }
+    body{
+        font-size: x-large;
     }
   }

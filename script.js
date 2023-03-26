@@ -18,6 +18,9 @@
 
         typing(txt);                                        //CALLING typing FUNCTION FOR THE FIRST TEXT TO BE SHOWN
 
+        timeText.innerHTML = gettingTime();
+
+
 
         //FUNCTION FOR TYPING ANIMATION
 
@@ -48,6 +51,24 @@
         
         }
             
+
+        //SETTING TIMING
+
+        function gettingTime(){
+
+            var dt = new Date();
+            let hours = dt.getHours();
+            let minutes = dt.getMinutes();
+            let ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes.toString().padStart(2, '0');
+            let time = hours + ':' + minutes  + " " + ampm;
+            return time;
+
+        }
+
+
 
         //SETTING ENTER CLICK TO CALLING SENT()
 
@@ -102,12 +123,18 @@
 
             userinput = userinput.toUpperCase();                        //CHANGING THE CASE OF THE INPUT TEXT TO UPPER CASE
 
+            timeText = document.createElement("div")
+            timeText.id = "timeText"
+            timeText.className = "timeText"
+
+            timeText.innerHTML = gettingTime();
+
+
             screen.appendChild(Right)                                   //MAKING Right A SUB CHILD OF screen
             Right.appendChild(UserMessage)                              //MAKING UserMessage A SUB CHILD OF Right
             UserMessage.appendChild(useranswer)                         //MAKING useranswer A SUB CHILD OF UserMessage
-
-
-        
+            UserMessage.appendChild(timeText)                           //MAKING Time A SUB CHILD OF Usermessage
+            
         
             var Left = document.createElement("div")                    //CREATING A NEW DIV Left (GRAND PARENT DIV OF SERVER'S MESSAGE)
             Left.className = "Left"                                     //SETTING DIV NAME AS Right FOR DOING IT CONTINUESLY
@@ -131,7 +158,8 @@
                     screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
                     Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
                     ServerMessage.appendChild(clue1)                    //MAKING clue2 A SUB CHILD OF ServerMessage
-                
+                    
+
 
                     //ASSIGNING SPECIFIC VALUE TO demo AND txt
 
@@ -139,6 +167,9 @@
                     txt = "THIS IS YOUR CLUE NO 1 DO THE FOLLOWING STEPS AND FIND THE REAMAINING CLUE AND BE THE ULTIMATE WINNER"
             
                     typing(txt);                                        //CALLING typing function
+
+
+                    
 
                     clue1.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
                     startcount++
@@ -274,7 +305,7 @@
 
             }
 
-            else if((startcount>0)||(clue1count>0)||(clue2count>0)||(clue3count>0)||(clue4count>0)||(finalAnswercount>0)){
+            else if((clue1count>0)||(clue2count>0)||(clue3count>0)||(clue4count>0)||(finalAnswercount>0)){
 
                 var countMessage = document.createElement("div")        //CREAING A NEW DIV finalAnswer (DIV FOR SHOWING THE USER THE HUNT IS OVER)
                 countMessage.id = "countMessage"                        //SETTING AN ID FOR finalAnswer
@@ -319,7 +350,16 @@
 
             }
 
+                    timeText = document.createElement("div")
+                    timeText.id = "timeText"
+                    timeText.className = "timeText"
+
+                    timeText.innerHTML = gettingTime();
+
+                    ServerMessage.appendChild(timeText)                     //MAKING Time A SUB CHILD OF ServerMessage
                 
 
             updateScroll();                                             //CALLING updateScroll FUNCTION TO ALWAYS PIN THE SCREEN DOWN
+        
+            Time.id = ""
         }
