@@ -1,0 +1,3 @@
+1. lowest number of steps nedded to reach libary
+
+2. 
