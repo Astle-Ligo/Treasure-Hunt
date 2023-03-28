@@ -9,9 +9,11 @@
 
         var score = 0;                                      //VARIABLE TO STORE THE SCORE
 
-        var clues = new Array("Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]","Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]")
+        var clues
 
-        var storys = new Array("Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker.","Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker.")
+        var storys
+
+        var image
 
         var cluedisplay = 0;
         var storydisplay = 0;
@@ -64,7 +66,14 @@
 
             story.id = ""
 
-            storydisplay = 1
+
+            timeText = document.createElement("div")
+            timeText.id = "timeText"
+            timeText.className = "timeText"
+
+            timeText.innerHTML = gettingTime();
+
+            ServerMessage.appendChild(timeText)                     //MAKING Time A SUB CHILD OF ServerMessage
 
         }
 
@@ -95,7 +104,55 @@
             clue.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
 
 
-            cluedisplay = 1
+            timeText = document.createElement("div")
+            timeText.id = "timeText"
+            timeText.className = "timeText"
+
+            timeText.innerHTML = gettingTime();
+
+            ServerMessage.appendChild(timeText)                     //MAKING Time A SUB CHILD OF ServerMessage
+
+
+        }
+
+
+        function printimage(){
+
+            var screen = document.getElementById("screen")              //SCREEN 
+
+            var Left = document.createElement("div")                    //CREATING A NEW DIV Left (GRAND PARENT DIV OF SERVER'S MESSAGE)
+            Left.className = "Left"                                     //SETTING DIV NAME AS Right FOR DOING IT CONTINUESLY
+
+
+            var ServerMessage = document.createElement("div")           //CREATING A NEW DIV ServerMessage (PARENT DIV OF SERVER'S MESSAGE)
+            ServerMessage.className = "ServerMessage"                   //SETTING DIV NAME AS UserMessage FOR REUSABILITY
+
+            var image = document.createElement("div")               //CREAING A NEW DIV clue1 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
+            
+            image.style.width= "20rem"
+            image.style.height = "20rem"
+
+
+            screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
+            Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
+            ServerMessage.appendChild(image)                    //MAKING clue2 A SUB CHILD OF ServerMessage
+
+            image.style.backgroundImage = "url('./Images/sju.png')" 
+            image.style.backgroundSize = "cover"
+            
+
+            image.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+
+
+            timeText = document.createElement("div")
+            timeText.id = "timeText"
+            timeText.className = "timeText"
+
+            timeText.innerHTML = gettingTime();
+
+            ServerMessage.appendChild(timeText)                     //MAKING Time A SUB CHILD OF ServerMessage
+
+
         }
 
         //FUNCTION FOR TYPING ANIMATION
@@ -273,129 +330,101 @@
                         printstory(storys);
 
                    
-                        clues = "Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate] You are required to describe the footage."
+                        clues = "Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate] You are required to describe the footage.   "
 
                         printclue(clues);
                 
-                  
+                        width = "100p";
+                        height = "100";
+
+                        printimage()
                 startcount++
+
+                data.push(secondTime() + "     -    " + userinput+"     -   "+score)
 
             }
 
-            else if((userinput === "ANSWER1")&&(clue1count<1)){
+            else if((userinput === "MAINGATE.MP4")&&(clue1count<1)){
 
-                storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
+                storys = "Agent 47, We are now looking into the information you've submitted. We are confirming the location."
 
                 printstory(storys);
 
-                clues = "Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]"
-                
+                clues = "Clue 2: We've just found out that the van took a left after entering and then went downhill. Follow the trace and find the van[qr code]."
                 printclue(clues);
 
                     clue1count++
 
                     score+=10
 
+                    data.push(secondTime() + "     -    " + userinput+"     -   "+score)
+
             }
                
-            else if((userinput === "ANSWER2")&&(clue2count<1)){
+            else if((userinput === "KL49P2727")&&(clue2count<1)){
 
-                    var clue3 = document.createElement("div")           //CREAING A NEW DIV clue3 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
-                    clue3.id = "clue3"                                  //SETTING AN ID FOR clue3
+                storys = "You found a suspicious guy standing near the van. You approached him. He started to make a fuss, situation got heated up. You had to resort to force to make the guy talk. You found a barcode keychain with a text on the back saying 'vovel-barcode'"
 
-                    
-                    screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
-                    Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
-                    ServerMessage.appendChild(clue3)                    //MAKING clue3 A SUB CHILD OF ServerMessage
-                    
+                printstory(storys);
 
-                    //ASSIGNING SPECIFIC VALUE TO demo AND txt
-
-                    demo = document.getElementById("clue3")
-                    txt = "THIS IS YOUR 3RD CLUE IN THIS HUNT. YOU HAVE TO PERFORM THE SPECFIC TASK TO GET INTO THE NEXT CLUE GOOD LUCK AND GO ON"
-            
-                    typing(txt);                                        //CALLING typing function                             
-                    
-
-                    clue3.id =""
+                clues = "Clue 3: Agent 47, We think that the 'vovel-barcode' might be a potential room number where they might be headed. You are required to scan the barcode to confirm this suspicion"
+                
+                printclue(clues);
 
                     clue2count++
 
                     score+=10
+
+                    data.push(secondTime() + "     -    " + userinput+"     -   "+score)
                     
             }
 
-            else if((userinput === "ANSWER3")&&(clue3count<1)){
+            else if((userinput === "A-102")&&(clue3count<1)){
 
-                    var clue4 = document.createElement("div")           //CREAING A NEW DIV clue4 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
-                    clue4.id = "clue4"                                  //SETTING AN ID FOR clue4
+                storys = "You found out that the lock was forcefully opened and there were traces of blood and fingerprints on the scene."
 
-                    
-                    screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
-                    Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
-                    ServerMessage.appendChild(clue4)                    //MAKING clue4 A SUB CHILD OF ServerMessage
-                    
+                printstory(storys);
 
-                    //ASSIGNING SPECIFIC VALUE TO demo AND txt
+                clues = "Clue 4: Collect the potential evidences to confirm the identity. Find a location optimal to do the testing inside the campus premises."
+                
+                printclue(clues);
 
-                    demo = document.getElementById("clue4")
-                    txt = "THIS IS YOUR 4TH CLUE IN THIS HUNT. YOU HAVE TO PERFORM THE SPECFIC TASK TO GET INTO THE NEXT CLUE GOOD LUCK AND GO ON"
-            
-                    typing(txt);                                        //CALLING typing function
-
-
-                    clue4.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
 
                     clue3count++
 
                     score+=10
                     
+                    data.push(secondTime() + "     -    " + userinput+"     -   "+score)
             }    
 
-            else if((userinput === "ANSWER4")&&(clue4count<1)){
+            else if((userinput === "evidence.data")&&(clue4count<1)){
 
-                    var clue5 = document.createElement("div")           //CREAING A NEW DIV clue5 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
-                    clue5.id = "clue5"                                  //SETTING AN ID FOR clue2
+                    storys = "The samples matches with that of the kidnapped person.EMERGENCY!, Agent 47 we've just got info that the driver had informed the kidnappers about a suspicious person who enquired about them. We think the team is on the move to remove all the loopholes present. "
 
-                    
-                    screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
-                    Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
-                    ServerMessage.appendChild(clue5)                    //MAKING clue5 A SUB CHILD OF ServerMessage
+                printstory(storys);
 
-
-                    //ASSIGNING SPECIFIC VALUE TO demo AND txt
-
-                    demo = document.getElementById("clue5")
-                    txt = "THIS IS YOUR 5TH CLUE IN THIS HUNT. YOU HAVE TO PERFORM THE SPECFIC TASK TO GET INTO THE NEXT CLUE GOOD LUCK AND GO ON"
-            
-                    typing(txt);                                        //CALLING typing function
-                    
-
-                    clue5.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+                clues = "Clue 5: You are to head to the main computer lab in Magis block to stop this from happening. "
+                
+                printclue(clues);
 
                     clue4count++
 
                     score+=10
+
+                    data.push(secondTime() + "     -    " + userinput+"     -   "+score)
                     
             } 
 
-            else if((userinput === "ANSWER5")&&(finalAnswercount<1)){
+            else if((userinput === "shortest_distance")&&(finalAnswercount<1)){
 
-                    var finalAnswer = document.createElement("div")     //CREAING A NEW DIV finalAnswer (DIV FOR SHOWING THE USER THE HUNT IS OVER)
-                    finalAnswer.id = "finalAnswer"                      //SETTING AN ID FOR finalAnswer
+                storys = "You succesfully got inside the system. You checked for recent files. You've found the recently opened file with a suspicious name."
 
-                    
-                    screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
-                    Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
-                    ServerMessage.appendChild(finalAnswer)              //MAKING finalAnswer A SUB CHILD OF ServerMessage
+                printstory(storys);
 
+                clues = "Clue 6:This might be an encrypted message. Wrack your brains! "
+                
+                printclue(clues);
 
-                    //ASSIGNING SPECIFIC VALUE TO demo AND txt
-
-                    demo = document.getElementById("finalAnswer")
-                    txt = "YOU HAVE COMPLETED THE TREASURE HUNT \n PLEASE ENTER CODE 'END' TO SAVE YOUR GAME"
-            
-                    typing(txt);                                        //CALLING typing function
 
                     finalAnswer.id = ""                                 //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
                     
@@ -404,97 +433,63 @@
 
                     score+=10
 
+                    data.push(secondTime() + "     -    " + userinput+"     -   "+score)
                     
 
             }
 
             else if(userinput === "END"){
 
-                var end = document.createElement("div")     //CREAING A NEW DIV finalAnswer (DIV FOR SHOWING THE USER THE HUNT IS OVER)
-                end.id = "end"                      //SETTING AN ID FOR finalAnswer
+                storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
 
+                printstory(storys);
+
+                clues = "Clue 7: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]"
                 
-                screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
-                Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
-                ServerMessage.appendChild(end)              //MAKING finalAnswer A SUB CHILD OF ServerMessage
-
-
-                //ASSIGNING SPECIFIC VALUE TO demo AND txt
-
-                demo = document.getElementById("end")
-                txt = "THANKS FOR PLAYING WITH US"
-        
-                typing(txt);                                        //CALLING typing function
-
-                end.id = ""                                 //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+                printclue(clues);
                 
-               
+
+                data.push(secondTime() + "     -    " + userinput+"     -   "+score)
 
                 func_savedata(data);
 
-        }
+            }
 
             else if(((userinput === "START")&&(startcount>0))||(userinput === "ANSWER2")&&(clue2count>0)||(userinput === "ANSWER1")&&(clue1count>0)||(userinput === "ANSWER3")&&(clue3count>0)||(userinput === "ANSWER4")&&(clue4count>0)||(userinput === "ANSWER5")&&(finalAnswercount>0)){
 
-                var countMessage = document.createElement("div")        //CREAING A NEW DIV finalAnswer (DIV FOR SHOWING THE USER THE HUNT IS OVER)
-                countMessage.id = "countMessage"                        //SETTING AN ID FOR finalAnswer
+                storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
 
+                printstory(storys);
+
+                clues = "Clue 8: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]"
                 
-                screen.appendChild(Left)                                //MAKING Left A SUB CHILD OF screen
-                Left.appendChild(ServerMessage)                         //MAKING ServerMessage A SUB CHILD OF Left
-                ServerMessage.appendChild(countMessage)                 //MAKING finalAnswer A SUB CHILD OF ServerMessage
-
-
-                //ASSIGNING SPECIFIC VALUE TO demo AND txt
-
-                demo = document.getElementById("countMessage")
-                txt = "YOU HAVE ALREADY ENTERED THE CODE '" + userinput + "'"
-        
-                typing(txt);                                            //CALLING typing function
-
-                countMessage.id = ""                                    //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
-                
+                printclue(clues);                
                 score -= 5
+
+                data.push(secondTime() + "     -    " + userinput+"     -   "+score)
             }
 
             else{
 
-                    var wrongAnswer = document.createElement("div")     //CREAING A NEW DIV wrongAnswer (DIV FOR SHOWING THE USER HAD ENTERED THE WRONG ANSWER)
-                    wrongAnswer.id = "wrongAnswer"                      //SETTING AN ID FOR wrongAnswer
+                storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
 
-                    
-                    screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
-                    Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
-                    ServerMessage.appendChild(wrongAnswer)              //MAKING wrongAnswer A SUB CHILD OF ServerMessage
+                printstory(storys);
 
-
-                    //ASSIGNING SPECIFIC VALUE TO demo AND txt
-                    
-                    demo = document.getElementById("wrongAnswer")
-                    txt = "SORRY WRONG INPUT" 
-            
-                    typing(txt);                                        //CALLING typing function
-
-                    wrongAnswer.id = ""                                 //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATATION OF CODE IN THE SAME DIV
-
+                clues = "Clue 9: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]"
+                
+                printclue(clues);
                     score -= 5
+
+                    data.push(secondTime() + "     -    " + userinput+"     -   "+score)
 
             }
 
-                    timeText = document.createElement("div")
-                    timeText.id = "timeText"
-                    timeText.className = "timeText"
 
-                    timeText.innerHTML = gettingTime();
-
-                    ServerMessage.appendChild(timeText)                     //MAKING Time A SUB CHILD OF ServerMessage
                 
 
             updateScroll();                                             //CALLING updateScroll FUNCTION TO ALWAYS PIN THE SCREEN DOWN
         
     
-
-            data.push(secondTime() + "     -    " + userinput+"     -   "+score)
 
             Time.id = ""
         }
