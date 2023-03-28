@@ -384,7 +384,7 @@
 
                 printstory(storys);
 
-                clues = "Clue 4: Collect the potential evidences to confirm the identity. Find a location optimal to do the testing inside the campus premises."
+                clues = "Clue 4: Collect the potential evidences to confirm the identity. Find a location optimal to do the testing inside the campus premises.[HINT : A LAB IN SCIENCE BLOCK]"
                 
                 printclue(clues);
 
@@ -402,7 +402,7 @@
 
                 printstory(storys);
 
-                clues = "Clue 5: You are to head to the main computer lab in Magis block to stop this from happening. "
+                clues = "Clue 5: You are to head to the main computer lab in Magis block to stop this from happening."
                 
                 printclue(clues);
 
