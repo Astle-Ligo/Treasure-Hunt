@@ -334,10 +334,8 @@
 
                         printclue(clues);
                 
-                        width = "100p";
-                        height = "100";
 
-                        printimage()
+                        //printimage()
                 startcount++
 
                 data.push(secondTime() + "     -    " + userinput+"     -   "+score)
@@ -361,13 +359,13 @@
 
             }
                
-            else if((userinput === "KL49P2727")&&(clue2count<1)){
+            else if((userinput === "JB007")&&(clue2count<1)){
 
                 storys = "You found a suspicious guy standing near the van. You approached him. He started to make a fuss, situation got heated up. You had to resort to force to make the guy talk. You found a barcode keychain with a text on the back saying 'vovel-barcode'"
 
                 printstory(storys);
 
-                clues = "Clue 3: Agent 47, We think that the 'vovel-barcode' might be a potential room number where they might be headed. You are required to scan the barcode to confirm this suspicion"
+                clues = "Clue 3: Agent 47, We think that the 'vowel-barcode' might be a potential room number where they might be headed. You are required to scan the barcode to confirm this suspicion"
                 
                 printclue(clues);
 
@@ -426,8 +424,6 @@
                 printclue(clues);
 
 
-                    finalAnswer.id = ""                                 //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
-                    
 
                     finalAnswercount++
 
@@ -440,7 +436,7 @@
 
             else if(userinput === "END"){
 
-                storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
+                storys = ""
 
                 printstory(storys);
 
