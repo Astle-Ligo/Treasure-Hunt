@@ -1,12 +1,20 @@
 
-        var demo                                            //VARIABLE TO STORE THE DIV ID IN WHICH THE TYPING ANIMATION TO BE DONE
+        var demo                                           //VARIABLE TO STORE THE DIV ID IN WHICH THE TYPING ANIMATION TO BE DONE
         var txt                                             //VARIABLE TO STORE THE TEXT THAT SHOULD BE ANIMATED
+
+        var demo1
+        var txt1
 
         var data = []                                       //VARIABLE TO STORE THE DATA OF INPUT TO SAVE AS PDF
 
         var score = 0;                                      //VARIABLE TO STORE THE SCORE
 
+        var clues = new Array("Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]","Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]")
 
+        var storys = new Array("Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker.","Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker.")
+
+        var cluedisplay = 0;
+        var storydisplay = 0;
 
         //VARIABLES USED FOR COUNTING THE NUMBER OF TIMES THE CODE IS ENTERED
 
@@ -19,23 +27,86 @@
         
 
         demo = document.getElementById("initial")           //ASSIGNING THE INITIAL DIV TO DEMO 
-        txt = "ENTER THE CODE 'START' TO START THE GAME"    //ASSIGNING THE INITIAL TEXT TO txt
+        txt = "ENTER THE CODE 'START' TO BEGIN THE GAME"    //ASSIGNING THE INITIAL TEXT TO txt
 
         typing(txt);                                        //CALLING typing FUNCTION FOR THE FIRST TEXT TO BE SHOWN
 
         timeText.innerHTML = gettingTime();
 
 
+        function printstory(storys){
+
+            var screen = document.getElementById("screen")              //SCREEN 
+
+            var Left = document.createElement("div")                    //CREATING A NEW DIV Left (GRAND PARENT DIV OF SERVER'S MESSAGE)
+            Left.className = "Left"                                     //SETTING DIV NAME AS Right FOR DOING IT CONTINUESLY
+
+
+            var ServerMessage = document.createElement("div")           //CREATING A NEW DIV ServerMessage (PARENT DIV OF SERVER'S MESSAGE)
+            ServerMessage.className = "ServerMessage"                   //SETTING DIV NAME AS UserMessage FOR REUSABILITY
+
+            var story = document.createElement("div")               //CREAING A NEW DIV clue1 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
+            story.id = "story"                                  //SETTING AN ID FOR clue1
+        
+            
+            screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
+            Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
+            ServerMessage.appendChild(story)                    //MAKING clue2 A SUB CHILD OF ServerMessage
+            
+
+
+            //ASSIGNING SPECIFIC VALUE TO demo AND txt
+
+            demo = document.getElementById("story")
+            txt = storys
+    
+            typing(txt);                                        //CALLING typing function
+
+            story.id = ""
+
+            storydisplay = 1
+
+        }
+
+        function printclue(clues){
+
+            var screen = document.getElementById("screen")              //SCREEN 
+
+            var Left = document.createElement("div")                    //CREATING A NEW DIV Left (GRAND PARENT DIV OF SERVER'S MESSAGE)
+            Left.className = "Left"                                     //SETTING DIV NAME AS Right FOR DOING IT CONTINUESLY
+
+
+            var ServerMessage = document.createElement("div")           //CREATING A NEW DIV ServerMessage (PARENT DIV OF SERVER'S MESSAGE)
+            ServerMessage.className = "ServerMessage"                   //SETTING DIV NAME AS UserMessage FOR REUSABILITY
+
+            var clue = document.createElement("div")               //CREAING A NEW DIV clue1 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
+            clue.id = "clue"                                  //SETTING AN ID FOR clue1
+            
+
+            screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
+            Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
+            ServerMessage.appendChild(clue)                    //MAKING clue2 A SUB CHILD OF ServerMessage
+
+            demo1 = document.getElementById("clue")
+            txt1 = clues
+
+            typing1(txt1);                                        //CALLING typing function
+
+            clue.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+
+
+            cluedisplay = 1
+        }
 
         //FUNCTION FOR TYPING ANIMATION
 
         function typing(txt){
                 
-        var i = 0;
-        var speed = 50;
+            var i = 0;
+            var speed = 50;
 
-        function typeWriter() {
-            if (i < txt.length) {
+            function typeWriter() {
+             if (i < txt.length) {
                 demo.innerHTML += txt.charAt(i);
                 i++;
             setTimeout(typeWriter, speed);
@@ -46,7 +117,7 @@
             else{
 
                 document.getElementById("usertext").style.pointerEvents="auto"  //SET THE POINTER BACK TO NORMAL
-
+                
             }
             updateScroll();
 
@@ -55,7 +126,35 @@
         typeWriter();
         
         }
+         
+
+        function typing1(txt1){
+                
+            var i = 0;
+            var speed = 50;
+    
+            function typeWriter1() {
+                if (i < txt1.length) {
+                    demo1.innerHTML += txt1.charAt(i);
+                    i++;
+                setTimeout(typeWriter1, speed);
+    
+                document.getElementById("usertext").style.pointerEvents="none"      //SET THE POINTER NOT TO USE WILL TYPING ANIMATION IS DONE
+                
+                }
+                else{
+    
+                    document.getElementById("usertext").style.pointerEvents="auto"  //SET THE POINTER BACK TO NORMAL
+    
+                }
+                updateScroll();
+    
+            }
+    
+            typeWriter1();
             
+            }
+
 
         //SETTING TIMINGS
 
@@ -169,51 +268,29 @@
 
             if((userinput === "START")&&(startcount<1)){
 
-                var clue1 = document.createElement("div")               //CREAING A NEW DIV clue1 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
-                    clue1.id = "clue1"                                  //SETTING AN ID FOR clue1
+                        storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
+
+                        printstory(storys);
+
+                   
+                        clues = "Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate] You are required to describe the footage."
+
+                        printclue(clues);
                 
-                    
-                    screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
-                    Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
-                    ServerMessage.appendChild(clue1)                    //MAKING clue2 A SUB CHILD OF ServerMessage
-                    
-
-
-                    //ASSIGNING SPECIFIC VALUE TO demo AND txt
-
-                    demo = document.getElementById("clue1")
-                    txt = "THIS IS YOUR CLUE NO 1 DO THE FOLLOWING STEPS AND FIND THE REAMAINING CLUE AND BE THE ULTIMATE WINNER"
-            
-                    typing(txt);                                        //CALLING typing function
-
-
-                    
-
-                    clue1.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
-                    startcount++
+                  
+                startcount++
 
             }
 
             else if((userinput === "ANSWER1")&&(clue1count<1)){
 
-                    var clue2 = document.createElement("div")           //CREAING A NEW DIV clue2 (DIV FOR SHOWING THE USER THE NEXT CLUE PRINTING THE CLUE)
-                    clue2.id = "clue2"                                  //SETTING AN ID FOR clue2
+                storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
 
-                    
-                    screen.appendChild(Left)                            //MAKING Left A SUB CHILD OF screen
-                    Left.appendChild(ServerMessage)                     //MAKING ServerMessage A SUB CHILD OF Left
-                    ServerMessage.appendChild(clue2)                    //MAKING clue2 A SUB CHILD OF ServerMessage
+                printstory(storys);
 
-
-                    //ASSIGNING SPECIFIC VALUE TO demo AND txt
-
-                    demo = document.getElementById("clue2")
-                    txt = "THIS IS YOUR 2ND CLUE IN THIS HUNT. YOU HAVE TO PERFORM THE SPECFIC TASK TO GET INTO THE NEXT CLUE GOOD LUCK AND GO ON"
-            
-                    typing(txt);                                        //CALLING typing function
-                    
-                    
-                    clue2.id = ""                                       //TO MAKE THE ID NAME BLANK TO PREVENT THE REPEATION OF CODE IN THE SAME DIV
+                clues = "Clue 1: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]"
+                
+                printclue(clues);
 
                     clue1count++
 
