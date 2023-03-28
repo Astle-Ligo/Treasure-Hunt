@@ -25,6 +25,7 @@
         var clue2count = 0
         var clue3count = 0
         var clue4count = 0
+        var clue5count = 0
         var finalAnswercount = 0
         
 
@@ -395,7 +396,7 @@
                     data.push(secondTime() + "     -    " + userinput+"     -   "+score)
             }    
 
-            else if((userinput === "evidence.data")&&(clue4count<1)){
+            else if((userinput === "EVIDENCE.DATA")&&(clue4count<1)){
 
                     storys = "The samples matches with that of the kidnapped person.EMERGENCY!, Agent 47 we've just got info that the driver had informed the kidnappers about a suspicious person who enquired about them. We think the team is on the move to remove all the loopholes present. "
 
@@ -413,13 +414,29 @@
                     
             } 
 
-            else if((userinput === "shortest_distance")&&(finalAnswercount<1)){
+            else if((userinput === "SIXTY EIGHT")&&(clue5count<1)){
 
                 storys = "You succesfully got inside the system. You checked for recent files. You've found the recently opened file with a suspicious name."
 
                 printstory(storys);
 
                 clues = "Clue 6:This might be an encrypted message. Wrack your brains! "
+                
+
+                clue5count++
+
+                score+=10
+
+                data.push(secondTime() + "     -    " + userinput+"     -   "+score)
+                
+        }            
+            else if((userinput === "RESCUE")&&(finalAnswercount<1)){
+
+                storys = "YOU HAVE RESCUDED THE HOSTAGE FROM THE TERRORISTS."
+
+                printstory(storys);
+
+                clues = "ENTER THE CODE 'END' TO SAVE YOUR GAME"
                 
                 printclue(clues);
 
@@ -436,13 +453,10 @@
 
             else if(userinput === "END"){
 
-                storys = ""
+                storys = "THANKS FOR PLAYING WITH US."
 
                 printstory(storys);
 
-                clues = "Clue 7: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]"
-                
-                printclue(clues);
                 
 
                 data.push(secondTime() + "     -    " + userinput+"     -   "+score)
@@ -451,29 +465,12 @@
 
             }
 
-            else if(((userinput === "START")&&(startcount>0))||(userinput === "ANSWER2")&&(clue2count>0)||(userinput === "ANSWER1")&&(clue1count>0)||(userinput === "ANSWER3")&&(clue3count>0)||(userinput === "ANSWER4")&&(clue4count>0)||(userinput === "ANSWER5")&&(finalAnswercount>0)){
-
-                storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
-
-                printstory(storys);
-
-                clues = "Clue 8: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]"
-                
-                printclue(clues);                
-                score -= 5
-
-                data.push(secondTime() + "     -    " + userinput+"     -   "+score)
-            }
-
             else{
 
-                storys = "Agent 47, This is Diana, Mission: Rescue of a Kidnapped Ethical Hacker."
+                storys = "SORRY WRONG INPUT"
 
                 printstory(storys);
 
-                clues = "Clue 9: The kidnapper’s Van was found entering the main gate of St. Joseph’s University. You are required to get hold of the main gate’s cctv footage. [Head to the main gate]"
-                
-                printclue(clues);
                     score -= 5
 
                     data.push(secondTime() + "     -    " + userinput+"     -   "+score)
